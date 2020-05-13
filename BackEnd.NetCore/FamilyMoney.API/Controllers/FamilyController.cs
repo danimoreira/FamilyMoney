@@ -7,7 +7,18 @@ namespace FamilyMoney.API.Controllers
     [Route("v1/family")]
     public class FamilyController : ControllerBase
     {
-        [HttpPost]   
+        /// <summary>
+        /// Adicionar Família
+        /// </summary>
+        /// <remarks>
+        /// Parametros de Entrada
+        /// {
+        ///     "name": "string"
+        /// }
+        /// </remarks>
+        /// <param name="family">Objeto do tipo Familia</param>
+        /// <response code="400">Ocorreu um erro na exceção</response>
+        [HttpPost]        
         public ActionResult<FamilyModel> AddFamily(
             [FromBody] FamilyModel family
         )
@@ -17,10 +28,11 @@ namespace FamilyMoney.API.Controllers
             else
                 return BadRequest(ModelState);
         }
-        
+
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<FamilyModel> GetFamily(int id){
+        public ActionResult<FamilyModel> GetFamily(int id)
+        {
 
             FamilyModel family = new FamilyModel();
             family.Name = "Nascimento's Family";
@@ -34,7 +46,8 @@ namespace FamilyMoney.API.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public ActionResult DeleteFamily(int id){
+        public ActionResult DeleteFamily(int id)
+        {
             if (ModelState.IsValid)
                 return NotFound();
             else
@@ -53,6 +66,6 @@ namespace FamilyMoney.API.Controllers
             else
                 return BadRequest(ModelState);
         }
-        
+
     }
 }
