@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyMoney.Repository", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyMoney.Service", "FamilyMoney.Service\FamilyMoney.Service.csproj", "{EBD59B40-6DA0-4D40-BB50-9969D5EE006D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyMoney.Util", "FamilyMoney.Util\FamilyMoney.Util.csproj", "{183D65D0-EE23-4B37-A4BE-73BE22607A54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{EBD59B40-6DA0-4D40-BB50-9969D5EE006D}.Release|x64.Build.0 = Release|Any CPU
 		{EBD59B40-6DA0-4D40-BB50-9969D5EE006D}.Release|x86.ActiveCfg = Release|Any CPU
 		{EBD59B40-6DA0-4D40-BB50-9969D5EE006D}.Release|x86.Build.0 = Release|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Debug|x64.Build.0 = Debug|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Debug|x86.Build.0 = Debug|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Release|x64.ActiveCfg = Release|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Release|x64.Build.0 = Release|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Release|x86.ActiveCfg = Release|Any CPU
+		{183D65D0-EE23-4B37-A4BE-73BE22607A54}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
