@@ -2,7 +2,7 @@ using System;
 using FamilyMoney.Domain.Enums;
 using FamilyMoney.Domain.ValueObjects;
 
-namespace FamilyMoney.API.Models
+namespace FamilyMoney.Domain.Entities
 {
     public class FinancialFlow : BaseEntity
     {

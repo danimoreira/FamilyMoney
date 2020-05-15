@@ -1,6 +1,6 @@
 using System;
 
-namespace FamilyMoney.API.Models
+namespace FamilyMoney.Domain.Entities
 {
     public class Family : BaseEntity
     {
