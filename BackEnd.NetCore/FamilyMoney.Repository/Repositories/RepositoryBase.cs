@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using FamilyMoney.Domain.Entities;
@@ -7,19 +9,28 @@ namespace FamilyMoney.Repository.Repositories
 {
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : BaseEntity
     {
-        private static SQLiteConnection _connection;
+        protected static SQLiteConnection _connection;        
+
+        public RepositoryBase()
+        {            
+            var connectionStringBuilder = new SQLiteConnectionStringBuilder();
+            connectionStringBuilder.DataSource = "Database\\familymoney.db";
+            _connection = new SQLiteConnection(connectionStringBuilder.ConnectionString);            
+            if (_connection.State == ConnectionState.Closed)
+                _connection.Open();
+        }        
 
         public virtual int Add(TEntity obj)
         {
             throw new System.NotImplementedException();
         }
 
-        public virtual void Delete(TEntity obj)
+        public virtual void Delete(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public virtual IQueryable<TEntity> GetAll()
+        public virtual List<TEntity> GetAll()
         {
             throw new System.NotImplementedException();
         }

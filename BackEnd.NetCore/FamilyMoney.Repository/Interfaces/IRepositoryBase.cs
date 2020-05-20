@@ -1,4 +1,5 @@
 using FamilyMoney.Domain.Entities;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 
@@ -8,9 +9,9 @@ namespace FamilyMoney.Repository.Interfaces
     {
         int Add(TEntity obj);
         void Update(TEntity obj);
-        void Delete(TEntity obj);
+        void Delete(int id);
         void Save();
-        IQueryable<TEntity> GetAll();
+        List<TEntity> GetAll();
         TEntity GetById(int id);
         
     }

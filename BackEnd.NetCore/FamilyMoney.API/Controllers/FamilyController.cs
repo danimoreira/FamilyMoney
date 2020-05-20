@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using FamilyMoney.API.Models;
+using FamilyMoney.Domain.Entities;
+using FamilyMoney.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyMoney.API.Controllers
@@ -7,24 +11,23 @@ namespace FamilyMoney.API.Controllers
     [Route("v1/family")]
     public class FamilyController : ControllerBase
     {
-        /// <summary>
-        /// Adicionar Família
-        /// </summary>
-        /// <remarks>
-        /// Parametros de Entrada
-        /// {
-        ///     "name": "string"
-        /// }
-        /// </remarks>
-        /// <param name="family">Objeto do tipo Familia</param>
-        /// <response code="400">Ocorreu um erro na exceção</response>
-        [HttpPost]        
-        public ActionResult<FamilyModel> AddFamily(
-            [FromBody] FamilyModel family
+        FamilyService _service;
+        public FamilyController()
+        {
+            _service = new FamilyService();
+        }
+
+        [HttpPost]
+        public ActionResult<int> AddFamily(
+            [FromBody] FamilyModel obj
         )
         {
             if (ModelState.IsValid)
-                return family;
+            {
+                Family family = new Family(obj.Name, "dmoreira");
+                return _service.Create(family);
+            }
+
             else
                 return BadRequest(ModelState);
         }
@@ -33,12 +36,35 @@ namespace FamilyMoney.API.Controllers
         [Route("{id}")]
         public ActionResult<FamilyModel> GetFamily(int id)
         {
+            if (ModelState.IsValid)
+            {
+                var obj = _service.GetById(id);
 
-            FamilyModel family = new FamilyModel();
-            family.Name = "Nascimento's Family";
+                if (obj == null)
+                    return new FamilyModel();
+
+                return new FamilyModel()
+                {
+                    Id = obj.Id,
+                    Name = obj.Name
+                };
+            }
+            else
+                return BadRequest(ModelState);
+
+        }
+
+        [HttpGet]
+        public ActionResult<List<FamilyModel>> GetAllFamily()
+        {
+            var obj = _service.GetAll();
 
             if (ModelState.IsValid)
-                return family;
+                return obj.Select(x => new FamilyModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }).ToList();
             else
                 return BadRequest(ModelState);
 
@@ -48,6 +74,8 @@ namespace FamilyMoney.API.Controllers
         [Route("{id}")]
         public ActionResult DeleteFamily(int id)
         {
+            _service.Delete(id);
+
             if (ModelState.IsValid)
                 return NotFound();
             else
@@ -59,10 +87,14 @@ namespace FamilyMoney.API.Controllers
             [FromBody] FamilyModel family
         )
         {
-            family.Name = family.Name + " - Updated";
-
             if (ModelState.IsValid)
+            {
+                var obj = _service.GetById(family.Id);
+                obj.Update(family.Name, "dnascimento");
+                _service.Update(obj);
                 return family;
+            }
+
             else
                 return BadRequest(ModelState);
         }
