@@ -2,15 +2,15 @@
 Projeto para Estudo de Tecnologias
 
 ## Backend.NetCore
-- VsCode
-- .Net Core 3.1
-- WebApi
-- RestFull
-- Dapper
+- **VsCode**
+- **.Net Core 3.1**
+- **WebApi**
+- **RestFull**
+- **Dapper**
 - Authentication Jwt/Bearer
-- SOLID
-- Pattern Repository
+- **SOLID**
+- **Pattern Repository**
 - Unit Of Work
-- DDD
+- **DDD**
 - TDD
-- Banco de Dados SQLite
+- **Banco de Dados SQLite**
