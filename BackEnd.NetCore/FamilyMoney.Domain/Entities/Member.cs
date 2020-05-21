@@ -4,21 +4,21 @@ namespace FamilyMoney.Domain.Entities
 {
     public class Member : BaseEntity
     {
-        public Member(Guid idFamily, string name, string user, string password, string role, string userCreate, string userUpdate)
+        public Member(int idFamily, string name, string user, string password, string role, string userCreate)
             : base(userCreate)
         {
             IdFamily = idFamily;
             Name = name;
-            User = user;
+            Username = user;
             Password = password;
             Role = role;
         }
 
         protected Member() { }
 
-        public Guid IdFamily { get; private set; }
+        public int IdFamily { get; private set; }
         public string Name { get; private set; }
-        public string User { get; private set; }
+        public string Username { get; private set; }
         public string Password { get; private set; }
         public string Role { get; private set; }
 
@@ -33,6 +33,14 @@ namespace FamilyMoney.Domain.Entities
             {
                 return false;
             }
+        }
+
+        public void Update(int idFamily, string name, string role, string userUpdate)
+        {
+            this.IdFamily = idFamily;
+            this.Name = name;
+            this.Role = role;
+            base.Update(userUpdate);
         }
 
     }

@@ -4,9 +4,10 @@ using System.ComponentModel.DataAnnotations;
 namespace FamilyMoney.API.Models
 {
     public class FinancialFlowModel
-    {
+    {        
+        public int Id {set; get;}
         [Required]
-        public Guid IdFamily { set; get; }
+        public int IdFamily { set; get; }
         [Required]
         public DateTime DateMovement { set; get; }
         [Required]

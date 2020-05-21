@@ -41,7 +41,7 @@ namespace FamilyMoney.API.Controllers
                 var obj = _service.GetById(id);
 
                 if (obj == null)
-                    return new FamilyModel();
+                    return NotFound("Registro não encontrado.");
 
                 return new FamilyModel()
                 {
@@ -59,14 +59,14 @@ namespace FamilyMoney.API.Controllers
         {
             var obj = _service.GetAll();
 
-            if (ModelState.IsValid)
+            if (obj != null)
                 return obj.Select(x => new FamilyModel()
                 {
                     Id = x.Id,
                     Name = x.Name
                 }).ToList();
             else
-                return BadRequest(ModelState);
+                return NotFound("Não foram encontrados registros cadastrados.");
 
         }
 
@@ -90,14 +90,24 @@ namespace FamilyMoney.API.Controllers
             if (ModelState.IsValid)
             {
                 var obj = _service.GetById(family.Id);
-                obj.Update(family.Name, "dnascimento");
-                _service.Update(obj);
-                return family;
+                if (obj != null)
+                {
+                    obj.Update(family.Name, "dnascimento");
+                    _service.Update(obj);
+                    return family;
+                }
+                else
+                {
+                    return NotFound("Registro não encontrado");
+                }
+
             }
 
             else
                 return BadRequest(ModelState);
         }
+
+        
 
     }
 }

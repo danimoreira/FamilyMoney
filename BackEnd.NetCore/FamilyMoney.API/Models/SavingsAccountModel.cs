@@ -5,8 +5,9 @@ namespace FamilyMoney.API.Models
 {
     public class SavingsAccountModel
     {
+        public int Id { get; set; }
         [Required]
-        public Guid IdFamily { set; get; }
+        public int IdFamily { set; get; }
         [Required]
         public DateTime DateMovement { set; get; }
         [Required]
