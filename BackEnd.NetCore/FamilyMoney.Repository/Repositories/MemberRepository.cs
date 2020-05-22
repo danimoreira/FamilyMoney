@@ -51,10 +51,10 @@ namespace FamilyMoney.Repository.Repositories
             return obj;
         }
 
-        public bool Login(string username, string password)
+        public Member Login(string username, string password)
         {
-            var obj = _connection.Query<Member>(@"SELECT * FROM member WHERE username = @user AND password = @password", new { username, password }).FirstOrDefault();            
-            return obj != null;
+            var obj = _connection.Query<Member>(@"SELECT * FROM member WHERE username = @username AND password = @password", new { username, password }).FirstOrDefault();            
+            return obj;
         }
 
     }

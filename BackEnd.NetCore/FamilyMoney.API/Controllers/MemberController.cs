@@ -3,6 +3,7 @@ using System.Linq;
 using FamilyMoney.API.Models;
 using FamilyMoney.Domain.Entities;
 using FamilyMoney.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyMoney.API.Controllers
@@ -35,6 +36,7 @@ namespace FamilyMoney.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "admin")]
         public ActionResult<List<MemberModel>> GetAllMembers()
         {
             var obj = _service.GetAll();
@@ -51,26 +53,26 @@ namespace FamilyMoney.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<Member> GetById(int id)
+        [Authorize(Roles = "admin")]
+        public ActionResult<MemberModel> GetById(int id)
         {
             var obj = _service.GetById(id);
             if (obj != null)
-                return obj;
-
-                // return new MemberModel()
-                // {
-                //     Id = obj.Id,
-                //     IdFamily = obj.IdFamily,
-                //     Name = obj.Name,
-                //     User = obj.User,
-                //     Role = obj.Role
-                // };
+                return new MemberModel()
+                {
+                    Id = obj.Id,
+                    IdFamily = obj.IdFamily,
+                    Name = obj.Name,
+                    Username = obj.Username,
+                    Role = obj.Role
+                };
             else
                 return NotFound("Registro não encontrado");
         }
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteMember(int id)
         {
             _service.Delete(id);
@@ -79,6 +81,7 @@ namespace FamilyMoney.API.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "admin")]
         public ActionResult<MemberModel> UpdateMember(
             [FromBody] MemberModel member
         )
@@ -104,21 +107,34 @@ namespace FamilyMoney.API.Controllers
 
         [HttpGet]
         [Route("login")]
-        public ActionResult<LoginModel> Login(
+        [AllowAnonymous]
+        public ActionResult<dynamic> Login(
             [FromBody] LoginModel login
         )
         {
             if (ModelState.IsValid)
             {
-                var result = _service.Login(login.User, login.Password);
-                if (result)
-                    return Ok("Acesso permitido");
-                else
-                    return Unauthorized("Acesso negado");
+                Member obj = _service.Login(login.User, login.Password);
+                if (obj == null)
+                    return NotFound("Usuário não encontrado");
+
+                // Gera o token
+                var token = TokenService.GenerateToken(obj);
+
+                var user = new MemberModel()
+                {
+                    Id = obj.Id,
+                    IdFamily = obj.IdFamily,
+                    Name = obj.Name,
+                    Username = obj.Username,
+                    Role = obj.Role
+                };
+
+                return new { user = user, token = token };
             }
             else
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
         }
 

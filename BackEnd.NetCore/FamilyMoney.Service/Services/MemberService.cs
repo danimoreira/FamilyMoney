@@ -39,7 +39,7 @@ namespace FamilyMoney.Service.Services
             _repository.Update(obj);
         }
 
-        public bool Login(string user, string password)
+        public Member Login(string user, string password)
         {
             return _repository.Login(user, password);
         }

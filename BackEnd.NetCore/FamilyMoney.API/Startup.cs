@@ -14,6 +14,10 @@ using Swashbuckle.AspNetCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.IO;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using FamilyMoney.Service;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FamilyMoney.API
 {
@@ -29,6 +33,8 @@ namespace FamilyMoney.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var key = Encoding.ASCII.GetBytes(Settings.KeySecret);
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -44,6 +50,25 @@ namespace FamilyMoney.API
                     }
                 });
             });
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +83,7 @@ namespace FamilyMoney.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -71,6 +97,8 @@ namespace FamilyMoney.API
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FamilyMoney.API V1");
             });
+
+
         }
     }
 }

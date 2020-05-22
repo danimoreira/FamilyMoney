@@ -3,6 +3,7 @@ using System.Linq;
 using FamilyMoney.API.Models;
 using FamilyMoney.Domain.Entities;
 using FamilyMoney.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyMoney.API.Controllers
@@ -18,6 +19,7 @@ namespace FamilyMoney.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult<int> AddFamily(
             [FromBody] FamilyModel obj
         )
@@ -34,6 +36,7 @@ namespace FamilyMoney.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize]
         public ActionResult<FamilyModel> GetFamily(int id)
         {
             if (ModelState.IsValid)
@@ -55,6 +58,7 @@ namespace FamilyMoney.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult<List<FamilyModel>> GetAllFamily()
         {
             var obj = _service.GetAll();
@@ -72,6 +76,7 @@ namespace FamilyMoney.API.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "admin")]
         public ActionResult DeleteFamily(int id)
         {
             _service.Delete(id);
@@ -83,6 +88,7 @@ namespace FamilyMoney.API.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public ActionResult<FamilyModel> UpdateFamily(
             [FromBody] FamilyModel family
         )
