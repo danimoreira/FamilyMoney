@@ -20,6 +20,7 @@ namespace FamilyMoney.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous] 
         public ActionResult<int> RegisterMember(
             [FromBody] MemberModel member
         )

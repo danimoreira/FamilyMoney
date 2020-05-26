@@ -10,7 +10,7 @@ namespace FamilyMoney.Domain.Entities
             this.Name = name;
         }
 
-        public Family() { }
+        protected Family() { }
 
         public string Name { get; private set; }
 

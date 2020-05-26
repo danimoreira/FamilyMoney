@@ -6,13 +6,15 @@ namespace FamilyMoney.Domain.Entities
 {
     public class SavingsAccount : BaseEntity
     {
-        public SavingsAccount(Guid idFamily,
+        protected SavingsAccount() {}
+
+        public SavingsAccount(int idFamily,
                             DateTime dateMovement,
                             TypeMovementEnum typeMovement,
                             TypePaymentEnum typePayment,
                             string description,
                             string providerName,
-                            Guid idMemberMovement,
+                            int idMemberMovement,
                             string urlPaymentVoucher,
                             Double valueMovement,
                             SituationMovementEnum situationMovement,
@@ -32,8 +34,34 @@ namespace FamilyMoney.Domain.Entities
                                     urlPaymentVoucher);
         }
 
-        public Guid IdFamily { get; private set; }        
-        public Guid IdMemberMovement { get; private set; }        
+        public int IdFamily { get; private set; }        
+        public int IdMemberMovement { get; private set; }        
         public Movement Movement {get; private set;}
+
+        public void Update(int idFamily,
+                            DateTime dateMovement,
+                            TypeMovementEnum typeMovement,
+                            TypePaymentEnum typePayment,
+                            string description,
+                            string providerName,
+                            int idMemberMovement,
+                            string urlPaymentVoucher,
+                            Double valueMovement,
+                            SituationMovementEnum situationMovement,
+                            string userUpdate)
+        {
+            this.IdFamily = idFamily;
+            this.IdMemberMovement = idMemberMovement;
+
+            Movement.Update(dateMovement, 
+                            description,
+                            providerName,
+                            typeMovement,
+                            typePayment,
+                            valueMovement,
+                            urlPaymentVoucher);
+
+            base.Update(userUpdate);
+        }
     }
 }

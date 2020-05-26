@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using FamilyMoney.Domain.Enums;
 
 namespace FamilyMoney.API.Models
 {
@@ -11,17 +12,17 @@ namespace FamilyMoney.API.Models
         [Required]
         public DateTime DateMovement { set; get; }
         [Required]
-        public int TypeMovement { set; get; }
+        public TypeMovementEnum TypeMovement { set; get; }
         [Required]
-        public int TypePayment { set; get; }
+        public TypePaymentEnum TypePayment { set; get; }
         public string Description { set; get; }
         public string ProviderName { set; get; }
         [Required]
-        public Guid IdMemberMovement { set; get; }
+        public int IdMemberMovement { set; get; }
         public string UrlPaymentVoucher { set; get; }
         [Required]
         public Double ValueMovement { set; get; }
         [Required]
-        public int SituationMovement { set; get; }
+        public SituationMovementEnum SituationMovement { set; get; }
     }
 }
