@@ -7,7 +7,7 @@ Projeto para Estudo de Tecnologias
 - **WebApi**
 - **RestFull**
 - **Dapper**
-- Authentication Jwt/Bearer
+- **Authorization and Authentication Jwt/Bearer**
 - **SOLID**
 - **Pattern Repository**
 - Unit Of Work
