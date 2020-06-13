@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using FamilyMoney.Domain.Entities;
 using FamilyMoney.Repository.Repositories;
 
@@ -32,9 +33,14 @@ namespace FamilyMoney.Service.Services
             return _repository.GetById(id);
         }
 
-        public List<SavingsAccount> GetAll()
+        public IEnumerable<SavingsAccount> GetAll()
         {
             return _repository.GetAll();
+        }
+
+        public IEnumerable<SavingsAccount> GetAllRegisterByFamily(int idFamily){
+            var obj = this.GetAll().Where(x => x.IdFamily.Equals(idFamily)).ToList();
+            return obj;
         }
     }
 }

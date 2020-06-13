@@ -20,7 +20,7 @@ namespace FamilyMoney.API.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous] 
+        [AllowAnonymous]
         public ActionResult<int> RegisterMember(
             [FromBody] MemberModel member
         )
@@ -38,7 +38,7 @@ namespace FamilyMoney.API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "admin")]
-        public ActionResult<List<MemberModel>> GetAllMembers()
+        public ActionResult<IEnumerable<MemberModel>> GetAllMembers()
         {
             var obj = _service.GetAll();
 
@@ -76,9 +76,17 @@ namespace FamilyMoney.API.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult DeleteMember(int id)
         {
-            _service.Delete(id);
+            var obj = _service.GetById(id);
 
-            return NotFound("Registro excluído com sucesso.");
+            if (obj != null)
+            {
+                _service.Delete(id);
+                return Ok("Registro excluído com sucesso.");
+            }
+
+            return NotFound("Registr não encontrado");
+
+
         }
 
         [HttpPut]

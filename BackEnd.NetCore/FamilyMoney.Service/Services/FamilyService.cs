@@ -14,10 +14,9 @@ namespace FamilyMoney.Service.Services
             _repository = new FamilyRepository();
         }
 
-        public List<Family> GetAll()  {
+        public IEnumerable<Family> GetAll()  {
             var obj = _repository.GetAll();
-            return obj
-            ;
+            return obj;
         }
 
         public Family GetById(int id){

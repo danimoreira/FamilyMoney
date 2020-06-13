@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using FamilyMoney.Service;
 using Microsoft.IdentityModel.Tokens;
+using FamilyMoney.Repository;
 
 namespace FamilyMoney.API
 {
@@ -98,7 +99,7 @@ namespace FamilyMoney.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FamilyMoney.API V1");
             });
 
-
+            RegisterMappings.Register();
         }
     }
 }

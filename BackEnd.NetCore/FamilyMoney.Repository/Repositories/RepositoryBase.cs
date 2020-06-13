@@ -30,7 +30,7 @@ namespace FamilyMoney.Repository.Repositories
             throw new System.NotImplementedException();
         }
 
-        public virtual List<TEntity> GetAll()
+        public virtual IQueryable<TEntity> GetAll()
         {
             throw new System.NotImplementedException();
         }

@@ -101,9 +101,9 @@ namespace FamilyMoney.Repository.Repositories
             return obj;
         }
 
-        public override List<SavingsAccount> GetAll()
+        public override IQueryable<SavingsAccount> GetAll()
         {
-            var obj = _connection.Query<SavingsAccount>(@"SELECT * FROM savingaccount").ToList();
+            var obj = _connection.Query<SavingsAccount>(@"SELECT * FROM savingaccount").AsQueryable();
             return obj;
         }
     }

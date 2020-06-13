@@ -45,9 +45,9 @@ namespace FamilyMoney.Repository.Repositories
             return obj;
         }
 
-        public override List<Member> GetAll()
+        public override IQueryable<Member> GetAll()
         {
-            var obj = _connection.Query<Member>(@"SELECT * FROM member").ToList();
+            var obj = _connection.Query<Member>(@"SELECT * FROM member").AsQueryable();
             return obj;
         }
 

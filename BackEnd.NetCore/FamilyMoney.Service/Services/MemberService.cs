@@ -13,7 +13,7 @@ namespace FamilyMoney.Service.Services
             _repository = new MemberRepository();
         }
         
-        public List<Member> GetAll()  {
+        public IEnumerable<Member> GetAll()  {
             var obj = _repository.GetAll();
             return obj
             ;

@@ -18,8 +18,7 @@ namespace FamilyMoney.Domain.Entities
                             string urlPaymentVoucher,
                             Double valueMovement,
                             SituationMovementEnum situationMovement,
-                            string userCreate,
-                            string userUpdate)
+                            string userCreate)
             : base(userCreate)
         {
             this.IdFamily = idFamily;

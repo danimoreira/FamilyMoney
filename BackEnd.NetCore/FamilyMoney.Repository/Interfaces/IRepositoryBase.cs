@@ -11,7 +11,7 @@ namespace FamilyMoney.Repository.Interfaces
         void Update(TEntity obj);
         void Delete(int id);
         void Save();
-        List<TEntity> GetAll();
+        IQueryable<TEntity> GetAll();
         TEntity GetById(int id);
         
     }

@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FamilyMoney.Service\FamilyMoney.Service.csproj" />
     <ProjectReference Include="..\FamilyMoney.Domain\FamilyMoney.Domain.csproj" />
+    <ProjectReference Include="..\FamilyMoney.Repository\FamilyMoney.Repository.csproj" />
   </ItemGroup>
 
 
