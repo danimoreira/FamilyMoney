@@ -9,7 +9,7 @@ using FamilyMoney.Repository.Interfaces;
 namespace FamilyMoney.Repository.Repositories
 {
     public class FamilyRepository : RepositoryBase<Family>, IFamilyRepository
-    {
+    {        
         public override int Add(Family obj)
         {
             return _connection.Query<Int32>(@"INSERT INTO family (Name, DateCreate, UserCreate, Active) VALUES (@name, @datecreate, @usercreate, true); select last_insert_rowid()", new { obj.Name, obj.DateCreate, obj.UserCreate }).First();

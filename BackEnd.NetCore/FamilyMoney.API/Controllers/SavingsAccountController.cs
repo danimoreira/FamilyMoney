@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FamilyMoney.API.Models;
 using FamilyMoney.Domain.Entities;
+using FamilyMoney.Service.Interfaces;
 using FamilyMoney.Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,10 @@ namespace FamilyMoney.API.Controllers
     [Route("v1/savings")]
     public class SavingsAccountController : ControllerBase
     {
-        SavingsAccountService _service;
-        public SavingsAccountController()
+        private readonly ISavingsAccountService _service;
+        public SavingsAccountController(ISavingsAccountService service)
         {
-            _service = new SavingsAccountService();
+            _service = service;
         }
 
         [HttpGet]

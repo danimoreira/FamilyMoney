@@ -1,42 +1,18 @@
 using System.Collections.Generic;
 using FamilyMoney.Domain.Entities;
+using FamilyMoney.Repository.Interfaces;
 using FamilyMoney.Repository.Repositories;
+using FamilyMoney.Service.Interfaces;
 
 namespace FamilyMoney.Service.Services
 {
-    public class MemberService
+    public class MemberService : ServiceBase<Member>, IMemberService
     {
-        MemberRepository _repository;
+        private readonly IMemberRepository _repository;
 
-        public MemberService()
+        public MemberService(IMemberRepository repository) : base(repository)
         {
-            _repository = new MemberRepository();
-        }
-        
-        public IEnumerable<Member> GetAll()  {
-            var obj = _repository.GetAll();
-            return obj
-            ;
-        }
-
-        public Member GetById(int id){
-            var obj = _repository.GetById(id);
-            return obj;
-        }
-
-        public void Delete(int id)
-        {
-            _repository.Delete(id);
-        }
-
-        public int Create(Member obj)
-        {
-            return _repository.Add(obj);
-        }
-
-        public void Update(Member obj)
-        {
-            _repository.Update(obj);
+            _repository = repository;
         }
 
         public Member Login(string user, string password)

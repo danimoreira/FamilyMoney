@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FamilyMoney.API.Models;
 using FamilyMoney.Domain.Entities;
+using FamilyMoney.Service.Interfaces;
 using FamilyMoney.Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,11 @@ namespace FamilyMoney.API.Controllers
     [Route("v1/member")]
     public class MemberController : ControllerBase
     {
-        MemberService _service;
+        private readonly IMemberService _service;
 
-        public MemberController()
+        public MemberController(IMemberService service)
         {
-            _service = new MemberService();
+            _service = service;
         }
 
         [HttpPost]

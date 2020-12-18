@@ -19,6 +19,10 @@ using System.Text;
 using FamilyMoney.Service;
 using Microsoft.IdentityModel.Tokens;
 using FamilyMoney.Repository;
+using FamilyMoney.Repository.Interfaces;
+using FamilyMoney.Repository.Repositories;
+using FamilyMoney.Service.Services;
+using FamilyMoney.Service.Interfaces;
 
 namespace FamilyMoney.API
 {
@@ -37,6 +41,18 @@ namespace FamilyMoney.API
             var key = Encoding.ASCII.GetBytes(Settings.KeySecret);
 
             services.AddControllers();
+
+            services.AddTransient<IFamilyService, FamilyService>();
+            services.AddTransient<IFamilyRepository, FamilyRepository>();
+
+            services.AddTransient<IMemberService, MemberService>();
+            services.AddTransient<IMemberRepository, MemberRepository>();
+
+            services.AddTransient<IFinancialFlowService, FinancialFlowService>();
+            services.AddTransient<IFinancialFlowRepository, FinancialFlowRepository>();            
+
+            services.AddTransient<ISavingsAccountService, SavingsAccountService>();
+            services.AddTransient<ISavingsAccountRepository, SavingsAccountRepository>();
 
             services.AddSwaggerGen(c =>
             {

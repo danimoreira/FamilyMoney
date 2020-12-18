@@ -1,43 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using FamilyMoney.Domain.Entities;
+using FamilyMoney.Repository.Interfaces;
 using FamilyMoney.Repository.Repositories;
+using FamilyMoney.Service.Interfaces;
 
 namespace FamilyMoney.Service.Services
 {
-    public class SavingsAccountService
+    public class SavingsAccountService : ServiceBase<SavingsAccount>, ISavingsAccountService
     {
-        SavingsAccountRepository _repository;
-        public SavingsAccountService()
+        private readonly ISavingsAccountRepository _repository;
+        public SavingsAccountService(ISavingsAccountRepository repository) : base(repository)
         {
-            _repository = new SavingsAccountRepository();
+            _repository = repository;
         }
-
-        public int Create(SavingsAccount obj)
-        {
-            return _repository.Add(obj);
-        }
-
-        public void Delete(int id)
-        {
-            _repository.Delete(id);
-        }
-
-        public void Update(SavingsAccount obj)
-        {
-            _repository.Update(obj);
-        }
-
-        public SavingsAccount GetById(int id)
-        {
-            return _repository.GetById(id);
-        }
-
-        public IEnumerable<SavingsAccount> GetAll()
-        {
-            return _repository.GetAll();
-        }
-
+        
         public IEnumerable<SavingsAccount> GetAllRegisterByFamily(int idFamily){
             var obj = this.GetAll().Where(x => x.IdFamily.Equals(idFamily)).ToList();
             return obj;

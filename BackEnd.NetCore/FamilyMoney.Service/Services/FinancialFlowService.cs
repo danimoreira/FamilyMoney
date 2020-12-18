@@ -1,41 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using FamilyMoney.Domain.Entities;
+using FamilyMoney.Repository.Interfaces;
 using FamilyMoney.Repository.Repositories;
+using FamilyMoney.Service.Interfaces;
 
 namespace FamilyMoney.Service.Services
 {
-    public class FinancialFlowService
+    public class FinancialFlowService : ServiceBase<FinancialFlow>, IFinancialFlowService
     {
-        FinancialFlowRepository _repository;
-        public FinancialFlowService()
+        private readonly IFinancialFlowRepository _repository;
+        public FinancialFlowService(IFinancialFlowRepository repository) : base(repository)
         {
-            _repository = new FinancialFlowRepository();
-        }
-
-        public int Create(FinancialFlow obj)
-        {
-            return _repository.Add(obj);
-        }
-
-        public void Delete(int id)
-        {
-            _repository.Delete(id);
-        }
-
-        public void Update(FinancialFlow obj)
-        {
-            _repository.Update(obj);
-        }
-
-        public FinancialFlow GetById(int id)
-        {
-            return _repository.GetById(id);
-        }
-
-        public IEnumerable<FinancialFlow> GetAll()
-        {
-            return _repository.GetAll();
+            _repository = repository;
         }
 
         public IEnumerable<FinancialFlow> GetAllRegisterByFamily(int idFamily){
