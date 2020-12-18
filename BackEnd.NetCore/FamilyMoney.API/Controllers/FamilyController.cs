@@ -26,7 +26,7 @@ namespace FamilyMoney.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                Family family = new Family(obj.Name, "dmoreira");
+                Family family = new Family(obj.Name, User.Identity.Name);
                 return _service.Create(family);
             }
 
@@ -61,7 +61,7 @@ namespace FamilyMoney.API.Controllers
         [Authorize]
         public ActionResult<List<FamilyModel>> GetAllFamily()
         {
-            var obj = _service.GetAll();
+            var obj = _service.GetAll();            
 
             if (obj != null)
                 return obj.Select(x => new FamilyModel()
@@ -98,7 +98,7 @@ namespace FamilyMoney.API.Controllers
                 var obj = _service.GetById(family.Id);
                 if (obj != null)
                 {
-                    obj.Update(family.Name, "dnascimento");
+                    obj.Update(family.Name, User.Identity.Name);
                     _service.Update(obj);
                     return family;
                 }

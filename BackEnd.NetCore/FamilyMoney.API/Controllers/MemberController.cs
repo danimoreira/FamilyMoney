@@ -27,7 +27,7 @@ namespace FamilyMoney.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                Member obj = new Member(member.IdFamily, member.Name, member.Username, member.Password, member.Role, "dmoreira");
+                Member obj = new Member(member.IdFamily, member.Name, member.Username, member.Password, member.Role, member.Username);
                 return _service.Create(obj);
             }
             else
@@ -100,7 +100,7 @@ namespace FamilyMoney.API.Controllers
                 var obj = _service.GetById(member.Id);
                 if (obj != null)
                 {
-                    obj.Update(member.IdFamily, member.Name, member.Role, "dnascimento");
+                    obj.Update(member.IdFamily, member.Name, member.Role, User.Identity.Name);
                     _service.Update(obj);
                     return member;
                 }

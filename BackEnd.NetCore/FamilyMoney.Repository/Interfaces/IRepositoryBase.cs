@@ -1,6 +1,4 @@
 using FamilyMoney.Domain.Entities;
-using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
 
 namespace FamilyMoney.Repository.Interfaces

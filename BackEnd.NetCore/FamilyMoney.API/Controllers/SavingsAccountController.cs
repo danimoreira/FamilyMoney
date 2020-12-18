@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FamilyMoney.API.Controllers
 {
     [ApiController]
-    [Route("v1/financial")]
+    [Route("v1/savings")]
     public class SavingsAccountController : ControllerBase
     {
         SavingsAccountService _service;
@@ -101,7 +101,7 @@ namespace FamilyMoney.API.Controllers
                 var financial = new SavingsAccount(obj.IdFamily, obj.DateMovement, obj.TypeMovement,
                 obj.TypePayment, obj.Description, obj.ProviderName,
                 obj.IdMemberMovement, obj.UrlPaymentVoucher, obj.ValueMovement,
-                obj.SituationMovement, "dmoreira");
+                obj.SituationMovement, User.Identity.Name);
 
                 return _service.Create(financial);
             }
@@ -126,7 +126,7 @@ namespace FamilyMoney.API.Controllers
                     financial.Update(obj.IdFamily, obj.DateMovement, obj.TypeMovement,
                     obj.TypePayment, obj.Description, obj.ProviderName,
                     obj.IdMemberMovement, obj.UrlPaymentVoucher, obj.ValueMovement,
-                    obj.SituationMovement, "dmoreira");
+                    obj.SituationMovement, User.Identity.Name);
 
                     _service.Update(financial);
 

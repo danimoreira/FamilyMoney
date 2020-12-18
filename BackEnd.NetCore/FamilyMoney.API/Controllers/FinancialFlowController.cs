@@ -44,7 +44,7 @@ namespace FamilyMoney.API.Controllers
         }
 
         [HttpGet]
-        [Route("{idFamily}")]
+        [Route("byfamily/{idFamily}")]
         [Authorize]
         public ActionResult<IEnumerable<FinancialFlowModel>> GetAllFinancialByFamily(int idFamily)
         {
@@ -74,20 +74,29 @@ namespace FamilyMoney.API.Controllers
         {
             var obj = _service.GetById(id);
 
-            return new FinancialFlowModel()
+            if (obj != null)
             {
-                Id = obj.Id,
-                IdFamily = obj.IdFamily,
-                DateMovement = obj.Movement.DateMovement,
-                TypeMovement = obj.Movement.TypeMovement,
-                TypePayment = obj.Movement.TypePayment,
-                Description = obj.Movement.Description,
-                ProviderName = obj.Movement.ProviderName,
-                IdMemberMovement = obj.IdMemberMovement,
-                UrlPaymentVoucher = obj.Movement.UrlPaymentVoucher,
-                ValueMovement = obj.Movement.ValueMovement,
-                SituationMovement = obj.Movement.SituationMovement
-            };
+                return new FinancialFlowModel()
+                {
+                    Id = obj.Id,
+                    IdFamily = obj.IdFamily,
+                    DateMovement = obj.Movement.DateMovement,
+                    TypeMovement = obj.Movement.TypeMovement,
+                    TypePayment = obj.Movement.TypePayment,
+                    Description = obj.Movement.Description,
+                    ProviderName = obj.Movement.ProviderName,
+                    IdMemberMovement = obj.IdMemberMovement,
+                    UrlPaymentVoucher = obj.Movement.UrlPaymentVoucher,
+                    ValueMovement = obj.Movement.ValueMovement,
+                    SituationMovement = obj.Movement.SituationMovement
+                };
+            }
+            else
+            {
+                return NotFound("registro não encontrado!");
+            }
+
+
         }
 
         [HttpPost]
@@ -101,7 +110,7 @@ namespace FamilyMoney.API.Controllers
                 var financial = new FinancialFlow(obj.IdFamily, obj.DateMovement, obj.TypeMovement,
                 obj.TypePayment, obj.Description, obj.ProviderName,
                 obj.IdMemberMovement, obj.UrlPaymentVoucher, obj.ValueMovement,
-                obj.SituationMovement, "dmoreira");
+                obj.SituationMovement, User.Identity.Name);
 
                 return _service.Create(financial);
             }
@@ -126,7 +135,7 @@ namespace FamilyMoney.API.Controllers
                     financial.Update(obj.IdFamily, obj.DateMovement, obj.TypeMovement,
                     obj.TypePayment, obj.Description, obj.ProviderName,
                     obj.IdMemberMovement, obj.UrlPaymentVoucher, obj.ValueMovement,
-                    obj.SituationMovement, "dmoreira");
+                    obj.SituationMovement, User.Identity.Name);
 
                     _service.Update(financial);
 
