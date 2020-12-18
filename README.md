@@ -14,3 +14,4 @@ Projeto para Estudo de Tecnologias
 - **DDD**
 - TDD
 - **Banco de Dados SQLite**
+- **IOC (Injeção de Dependência Nativa .Net Core)**
