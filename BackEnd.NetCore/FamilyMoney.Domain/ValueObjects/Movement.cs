@@ -29,11 +29,12 @@ namespace FamilyMoney.Domain.ValueObjects
         {
             this.DateMovement = dateMovement;
             this.Description = description;
-            this.ProviderName = providerName;
-            this.TypeMovement = typeMovement;
-            this.TypePayment = TypePayment;
+            this.ProviderName = providerName;            
             this.ValueMovement = valueMovement;
             this.UrlPaymentVoucher = urlPaymentVoucher;
+
+            ChangeTypeMovement(typeMovement);
+            ChangeTypePayment(typePaymentEnum);
         }
 
         public void ChangeSituationMovement(SituationMovementEnum newSituation)

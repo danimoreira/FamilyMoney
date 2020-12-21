@@ -45,7 +45,7 @@ namespace FamilyMoney.API.Controllers
         }
 
         [HttpGet]
-        [Route("byfamily/{idFamily}")]
+        [Route("family/{idFamily}")]
         [Authorize]
         public ActionResult<IEnumerable<FinancialFlowModel>> GetAllFinancialByFamily(int idFamily)
         {
@@ -96,8 +96,6 @@ namespace FamilyMoney.API.Controllers
             {
                 return NotFound("registro não encontrado!");
             }
-
-
         }
 
         [HttpPost]
