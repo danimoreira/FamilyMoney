@@ -1,4 +1,3 @@
-
 using Dapper.FluentMap;
 using Dapper.FluentMap.Dommel;
 using FamilyMoney.Repository.Mapping;

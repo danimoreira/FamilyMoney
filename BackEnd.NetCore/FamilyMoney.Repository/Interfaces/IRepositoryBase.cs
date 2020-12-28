@@ -10,8 +10,6 @@ namespace FamilyMoney.Repository.Interfaces
         void Delete(int id);
         void Save();
         IQueryable<TEntity> GetAll();
-        TEntity GetById(int id);
-        
-    }
-    
+        TEntity GetById(int id);        
+    }    
 }
