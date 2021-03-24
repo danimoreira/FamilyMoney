@@ -10,8 +10,8 @@ Projeto para Estudo de Tecnologias
 - **Authorization and Authentication Jwt/Bearer**
 - **SOLID**
 - **Pattern Repository**
-- Unit Of Work
+- **Unit Of Work**
 - **DDD**
-- TDD
+- Unit Tests
 - **Banco de Dados SQLite**
 - **IOC (Injeção de Dependência Nativa .Net Core)**
